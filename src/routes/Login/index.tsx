@@ -1,15 +1,16 @@
 import React, { useCallback, useState } from "react";
+
+import { useHistory } from "react-router-dom";
 import { DASHBOARD_ROUTE } from "../../utils/routeConstants";
-import history from "../../history";
 
 const Login = () => {
+  const history = useHistory();
   const [userName, setUserName] = useState("");
 
   const handleSubmit = useCallback(() => {
-    console.log("userName", userName);
     localStorage.setItem("userName", userName);
     history.push(DASHBOARD_ROUTE);
-  }, [userName]);
+  }, [history, userName]);
 
   return (
     <div>
