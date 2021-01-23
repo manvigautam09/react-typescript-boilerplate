@@ -5,7 +5,7 @@ import { useLoginHook } from "../../store/hooks/userAuth";
 const Login = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const { userLoginRequestHandler } = useLoginHook();
+  const { userLoginRequestHandler, loginSpinner } = useLoginHook();
 
   return (
     <div>
@@ -19,7 +19,7 @@ const Login = () => {
         onChange={(event) => setPassword(event.target.value)}
       />
       <button onClick={() => userLoginRequestHandler({ userName, password })}>
-        Submit
+        {loginSpinner ? "Logging in" : "Submit"}
       </button>
     </div>
   );

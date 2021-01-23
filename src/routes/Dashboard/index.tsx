@@ -3,10 +3,11 @@ import React from "react";
 import { useLoginHook } from "../../store/hooks/userAuth";
 
 const Dashboard = () => {
-  const { logoutUserHandler } = useLoginHook();
+  const { logoutUserHandler, userName } = useLoginHook();
 
   return (
     <div>
+      <div>{userName}</div>
       <button onClick={logoutUserHandler}>Sign Out</button>
     </div>
   );

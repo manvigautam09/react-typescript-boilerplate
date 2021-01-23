@@ -1,12 +1,19 @@
 import { useCallback } from "react";
-import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
+import { StoreState } from "..";
 
 import { logoutUser, userLoginRequest } from "../actions/userActions";
 
 export const useLoginHook = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+
+  const { userName, loginSpinner } = useSelector((state: StoreState) => ({
+    userName: state.userAuth.userName,
+    loginSpinner: state.userAuth.loginSpinner,
+  }));
 
   const userLoginRequestHandler = useCallback(
     (payload: { userName: string; password: string }) => {
@@ -19,5 +26,5 @@ export const useLoginHook = () => {
     dispatch(logoutUser({ history }));
   }, [dispatch, history]);
 
-  return { userLoginRequestHandler, logoutUserHandler };
+  return { userLoginRequestHandler, logoutUserHandler, userName, loginSpinner };
 };
