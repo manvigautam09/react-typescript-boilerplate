@@ -1,16 +1,11 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 
-import { useHistory } from "react-router-dom";
-import { DASHBOARD_ROUTE } from "../../utils/routeConstants";
+import { useLoginHook } from "../../store/hooks/userAuth";
 
 const Login = () => {
-  const history = useHistory();
   const [userName, setUserName] = useState("");
-
-  const handleSubmit = useCallback(() => {
-    localStorage.setItem("userName", userName);
-    history.push(DASHBOARD_ROUTE);
-  }, [history, userName]);
+  const [password, setPassword] = useState("");
+  const { userLoginRequestHandler } = useLoginHook();
 
   return (
     <div>
@@ -19,7 +14,13 @@ const Login = () => {
         value={userName}
         onChange={(event) => setUserName(event.target.value)}
       />
-      <button onClick={handleSubmit}>Submit</button>
+      <input
+        value={password}
+        onChange={(event) => setPassword(event.target.value)}
+      />
+      <button onClick={() => userLoginRequestHandler({ userName, password })}>
+        Submit
+      </button>
     </div>
   );
 };

@@ -1,18 +1,13 @@
 import React from "react";
 
-import { useHistory } from "react-router-dom";
-import { LOGIN_ROUTE } from "../../utils/routeConstants";
+import { useLoginHook } from "../../store/hooks/userAuth";
 
 const Dashboard = () => {
-  const history = useHistory();
-  const handleSignOut = () => {
-    localStorage.clear();
-    history.push(LOGIN_ROUTE);
-  };
+  const { logoutUserHandler } = useLoginHook();
 
   return (
     <div>
-      <button onClick={handleSignOut}>Sign Out</button>
+      <button onClick={logoutUserHandler}>Sign Out</button>
     </div>
   );
 };

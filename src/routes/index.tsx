@@ -53,7 +53,7 @@ interface ProtectedRoutesProps {
 
 const ProtectedRoutes = (props: RouteComponentProps & ProtectedRoutesProps) => {
   const { component: Component, privateRoute, ...rest } = props;
-  const isUserPresent = localStorage.getItem("userName");
+  const isUserPresent = localStorage.getItem("accessToken");
 
   const isValidRoute =
     (privateRoute && isUserPresent) || !(privateRoute || isUserPresent);
