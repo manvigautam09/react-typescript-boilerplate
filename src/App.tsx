@@ -1,4 +1,3 @@
-import React from "react";
 import AppBoot from "./containers/AppBoot";
 
 function App() {

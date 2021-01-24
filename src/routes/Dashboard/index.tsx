@@ -1,5 +1,3 @@
-import React from "react";
-
 import { useLoginHook } from "../../store/hooks/userAuth";
 
 const Dashboard = () => {
