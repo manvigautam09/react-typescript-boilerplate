@@ -9,7 +9,7 @@ import {
 
 import Login from "./Login";
 import Dashboard from "./Dashboard";
-import Landing from "./Landing";
+import Root from "./Root";
 import PageNotFound from "./PageNotFound";
 import {
   ROOT_ROUTE,
@@ -26,9 +26,9 @@ interface RouteConfigProps {
 }
 
 const routesConfig = {
-  landing: {
+  root: {
     path: ROOT_ROUTE,
-    component: Landing,
+    component: Root,
     exact: true,
     privateRoute: false,
   },
