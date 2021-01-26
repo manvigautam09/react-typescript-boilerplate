@@ -1,5 +1,6 @@
 import { put, takeLatest, delay } from "redux-saga/effects";
 import { DASHBOARD_ROUTE, LOGIN_ROUTE } from "../../utils/routeConstants";
+
 import {
   logoutUser,
   userLoginFailure,
@@ -7,6 +8,10 @@ import {
   userLoginSuccess,
 } from "../actions/userActions";
 import actionsTypes from "../actionTypes";
+import {
+  clearLocalStorage,
+  setLocalStorageTokens,
+} from "../../utils/tokenHelpers";
 
 function* fetchUser(action: ReturnType<typeof userLoginRequest>) {
   try {
@@ -16,8 +21,7 @@ function* fetchUser(action: ReturnType<typeof userLoginRequest>) {
 
     const refreshToken = `${userName}+${password}`;
     const accessToken = `${userName}+${password}`;
-    localStorage.setItem("refreshToken", refreshToken);
-    localStorage.setItem("accessToken", accessToken);
+    setLocalStorageTokens({ userName, accessToken, refreshToken });
 
     history.push(DASHBOARD_ROUTE);
     yield put(userLoginSuccess({ userName, accessToken, refreshToken }));
@@ -36,7 +40,8 @@ function* logoutUserSaga(action: ReturnType<typeof logoutUser>) {
 
     // To understand debounce functionality Hit logout button multiple times withing 1 second and this console will be only printed once
     console.log("Logout Request");
-    localStorage.clear();
+
+    clearLocalStorage();
     history.push(LOGIN_ROUTE);
   } catch (error) {
     console.log("error", error);

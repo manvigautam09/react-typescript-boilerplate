@@ -1,9 +1,10 @@
 import { Redirect } from "react-router-dom";
 
+import { isTokensPresentLocalStorage } from "../../utils/tokenHelpers";
 import { DASHBOARD_ROUTE, LOGIN_ROUTE } from "../../utils/routeConstants";
 
 const Root = () => {
-  const isUserPresent = localStorage.getItem("accessToken");
+  const isUserPresent = isTokensPresentLocalStorage();
   return isUserPresent ? (
     <Redirect to={DASHBOARD_ROUTE} />
   ) : (

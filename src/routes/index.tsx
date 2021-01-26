@@ -16,6 +16,7 @@ import {
   LOGIN_ROUTE,
   DASHBOARD_ROUTE,
 } from "../utils/routeConstants";
+import { isTokensPresentLocalStorage } from "../utils/tokenHelpers";
 
 interface RouteConfigProps {
   path: string | string[];
@@ -26,7 +27,7 @@ interface RouteConfigProps {
 }
 
 const routesConfig = {
-  root: {
+  landing: {
     path: ROOT_ROUTE,
     component: Root,
     exact: true,
@@ -53,7 +54,7 @@ interface ProtectedRoutesProps {
 
 const ProtectedRoutes = (props: RouteComponentProps & ProtectedRoutesProps) => {
   const { component: Component, privateRoute, ...rest } = props;
-  const isUserPresent = localStorage.getItem("accessToken");
+  const isUserPresent = isTokensPresentLocalStorage();
 
   const isValidRoute =
     (privateRoute && isUserPresent) || !(privateRoute || isUserPresent);
